@@ -1,5 +1,10 @@
 import axios from 'axios'
-import type { CreateAxiosDefaults, InternalAxiosRequestConfig } from 'axios'
+import type {
+  AxiosInstance,
+  AxiosPromise,
+  CreateAxiosDefaults,
+  InternalAxiosRequestConfig
+} from 'axios'
 import { ss } from '@/utils/cache/storage'
 import global from '../global'
 import router from '@/router'
@@ -22,7 +27,7 @@ const axiosInstance = axios.create({
 })
 
 class HttpRequest {
-  private instance
+  private instance: AxiosInstance
   private options
   constructor(options: CreateAxiosDefaults = {}) {
     this.options = merge(options, {
@@ -76,11 +81,11 @@ class HttpRequest {
   }
 
   static createAxios(options = {}) {
-    return new HttpRequest(options)
+    return new HttpRequest(options).instance
   }
 }
 
-export const request = HttpRequest.createAxios()
+export const request: AxiosInstance = HttpRequest.createAxios()
 
 // import axios from 'axios'
 // import getAuthorization from '@utils/getAuthorization'

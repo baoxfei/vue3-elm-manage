@@ -1,5 +1,6 @@
-const global = {
-  token: 'token'
+const GLOBAL_KEY = {
+  token: 'token',
+  secret: 'secret'
 }
 
-export default global
+export default GLOBAL_KEY

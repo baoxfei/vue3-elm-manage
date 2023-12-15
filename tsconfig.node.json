@@ -11,6 +11,9 @@
     "composite": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "paths": {
+      
+    },
     "types": ["node", "element-plus/global"]
   }
 }
