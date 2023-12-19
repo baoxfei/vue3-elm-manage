@@ -17,11 +17,12 @@ import { ElMessage } from 'element-plus';
 import { reactive } from 'vue';
 import { request } from '@/utils/http/axios'
 import router from '@/router';
+import QTool from '@/utils/tools';
 
   const form = reactive({ username: '', password: '' })
   const onSubmit = async () => {
     try {
-      await request.post('/admin/register', { ...form, account: form.username })
+      await request.post('/admin/register', { ...form, account: QTool.encrypt(form.password) })
       router.push('/login')
     } catch (error) {
       ElMessage(getErrorMsg(error))
