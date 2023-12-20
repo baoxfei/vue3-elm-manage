@@ -50,3 +50,10 @@ npm run test:unit
 ```sh
 npm run lint
 ```
+
+## summarize
+
+1. tsx语法
+ 支持 v-show
+ 不支持 v-for v-if v-bind(绑定值) v-on(绑定事件)
+ [链接](https://huaweicloud.csdn.net/638f1513dacf622b8df8f1f1.html)
