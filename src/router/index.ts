@@ -29,30 +29,30 @@ const router = createRouter({
         {
           path: '/panel',
           name: 'panel',
-          component: import('@/views/dashboard/Panel.vue')
+          component: () => import('@/views/dashboard/Panel.vue')
         },
         {
           path: '/addShop',
           name: 'addShop',
-          component: import('@/views/dashboard/addShop.vue'),
+          component: () => import('@/views/dashboard/AddShop.vue'),
           meta: {}
         },
         {
           path: '/shopList',
           name: 'shopList',
-          component: import('@/views/dashboard/ShopList.vue'),
+          component: () => import('@/views/dashboard/ShopList.vue'),
           meta: {}
         },
         {
           path: '/goods',
           name: 'goods',
-          component: import('@/views/dashboard/Goods.vue'),
+          component: () => import('@/views/dashboard/Goods.vue'),
           meta: {}
         },
         {
           path: '/addGoods',
           name: 'addGoods',
-          component: import('@/views/dashboard/addGoods.vue'),
+          component: () => import('@/views/dashboard/AddGoods.vue'),
           meta: {}
         }
       ]

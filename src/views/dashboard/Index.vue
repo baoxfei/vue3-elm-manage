@@ -37,12 +37,13 @@
       </ElMenu>
     </div>
     <div class="subPage">
-      <router-view></router-view>
+      <RouterView></RouterView>
     </div>
   </div>
 </template>
 <script setup lang="ts">
 import { reactive } from 'vue';
+import { RouterView } from 'vue-router'
 import { List, Setting, Menu } from '@element-plus/icons-vue'
 // import { ElMenuItem, ElMenu, ElSubMenu, ElIcon, } from 'element-plus'
 

@@ -46,3 +46,21 @@ export const ss = WebStorage.createWebStorage({
 })
 
 export const ls = WebStorage.createWebStorage({ storage: localStorage, prefix: '' })
+
+const cookie = (function () {
+  const getCookie = (key) => {
+    const name = key + '='
+    const all = document.cookie.split(';')
+    for (let i = 0; i < all.length; i++) {
+      if (all[i].includes(name)) return all[i].trim().replace(name, '')
+    }
+  }
+
+  const setCookie = (key) => {}
+  return {
+    getCookie,
+    setCookie
+  }
+})()
+
+export { cookie }

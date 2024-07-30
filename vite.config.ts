@@ -26,13 +26,14 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:5000',
-        changeOrigin: true
-      },
-      '/admin': {
-        target: 'http://127.0.0.1:5000',
-        changeOrigin: true
+        target: 'http://127.0.0.1:8001',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/\/api/, '')
       }
+      // '/admin': {
+      //   target: 'http://127.0.0.1:8001',
+      //   changeOrigin: true
+      // }
     }
   },
   resolve: {

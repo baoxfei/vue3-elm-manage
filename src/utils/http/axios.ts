@@ -5,7 +5,7 @@ import type {
   CreateAxiosDefaults,
   InternalAxiosRequestConfig
 } from 'axios'
-import { ss } from '@/utils/cache/storage'
+import { ss, cookie } from '@/utils/cache/storage'
 import global from '../global'
 import router from '@/router'
 import HttpMessage from './httpMessage'
@@ -13,7 +13,6 @@ import { ElMessage } from 'element-plus'
 import { merge } from 'lodash'
 
 const axiosInstance = axios.create({
-  baseURL: '',
   timeout: 30000,
   headers: {
     // Authorization: '', //
@@ -50,17 +49,20 @@ class HttpRequest {
     return axios.create(options)
   }
   private setupInterceptors() {
-    axios.interceptors.request.use(
+    this.instance.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
-        const token = ss.get(global.token)
+        const token = cookie.getCookie(global.token)
+
         if (config.url?.indexOf('/public') == -1 && token) {
-          config.headers.Authorization = token
+          config.headers['Authorization'] = `Bearer ${token}`
         }
+
+        config.url = `/api${config.url}`
         return config
       },
       (error) => Promise.reject(error)
     )
-    axios.interceptors.response.use(null, (error) => {
+    this.instance.interceptors.response.use(null, (error) => {
       switch (error.response.status) {
         case 401:
           ss.clear()

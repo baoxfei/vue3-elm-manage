@@ -7,12 +7,15 @@ type RequestError = {
   data?: Record<string, any>
 }
 
-export const getErrorMsg = (error, defaultError?: string) => {
-  return error.msg || error.desc || defaultError || error?.toString?.()
+export const getErrorMsg = (error, defaultError = '操作异常') => {
+  return error?.message || error?.desc || defaultError || error?.toString?.()
 }
 
 export const dataWrapper = (p: Promise<any>): Promise<any> => {
   return new Promise((resolve, reject) => {
-    p.then((result) => resolve(result.data)).catch((error) => reject(error))
+    p.then((result) => {
+      if (result?.status !== 200) return reject('不是200')
+      resolve(result.data.data)
+    }).catch((error) => reject(error))
   })
 }

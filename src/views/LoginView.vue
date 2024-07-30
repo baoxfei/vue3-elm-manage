@@ -23,6 +23,8 @@ import { reactive } from 'vue'
 import { request } from '@/utils/http/axios'
 import QTool from '@/utils/tools';
 import { ElMessage } from 'element-plus'
+import { login } from '@/api/user'
+import router from '@/router';
 
 const form = reactive<{ username: string; password: string }>({
   username: '',
@@ -31,10 +33,8 @@ const form = reactive<{ username: string; password: string }>({
 
 const onSubmit =  async () => {
   try {
-    await request.post('/admin/login', {
-      username: form.username,
-      password: QTool.encrypt(form.password)
-    })
+    await login({ ...form, password: QTool.encrypt(form.password) })
+    router.push('/addShop')
   } catch (error) {
     ElMessage(`${error}`)
   }
